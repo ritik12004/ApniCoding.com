@@ -1,0 +1,234 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #a855f7;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #1f2937;
+  --color-secondary-foreground: #f9fafb;
+  --color-accent: #374151;
+  --color-accent-foreground: #f9fafb;
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #ffffff;
+  --color-muted: #1f2937;
+  --color-muted-foreground: #9ca3af;
+  --color-background: #030712;
+  --color-foreground: #f9fafb;
+  --color-card: #0f172a;
+  --color-card-foreground: #f9fafb;
+  --color-border: #1f2937;
+  --color-input: #1f2937;
+  --color-ring: #a855f7;
+
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  --animate-ping: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+  --animate-pulse: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-spin: spin 1s linear infinite;
+  --animate-bounce: bounce 1s infinite;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  ::selection {
+    @apply bg-primary/30 text-primary-foreground;
+  }
+  
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+}
+
+@layer components {
+  .prose {
+    @apply text-gray-300;
+  }
+  
+  .prose h1, .prose h2, .prose h3, .prose h4 {
+    @apply text-white font-bold;
+  }
+  
+  .prose code {
+    @apply bg-gray-800 px-1.5 py-0.5 rounded text-purple-300 text-sm font-mono;
+  }
+  
+  .prose pre {
+    @apply bg-gray-900 border border-gray-700 rounded-lg p-4 overflow-x-auto;
+  }
+  
+  .prose pre code {
+    @apply bg-transparent p-0 text-gray-100;
+  }
+  
+  .prose a {
+    @apply text-purple-400 hover:text-purple-300 underline;
+  }
+  
+  .prose blockquote {
+    @apply border-l-4 border-purple-500 pl-4 italic text-gray-400 my-4;
+  }
+  
+  .prose ul, .prose ol {
+    @apply my-4 ml-6;
+  }
+  
+  .prose li {
+    @apply mb-2;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .gradient-text {
+    @apply bg-gradient-to-r from-purple-400 via-pink-400 to-orange-400 bg-clip-text text-transparent;
+  }
+  
+  .glass {
+    @apply bg-white/5 backdrop-blur-sm border border-white/10;
+  }
+  
+  .glass-dark {
+    @apply bg-black/30 backdrop-blur-sm border border-white/10;
+  }
+}
+
+/* Monaco Editor customizations */
+.monaco-editor {
+  @apply rounded-lg border border-gray-700;
+}
+
+.monaco-editor .margin {
+  @apply bg-gray-950;
+}
+
+.monaco-editor .line-numbers {
+  @apply text-gray-500;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-900;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-700 rounded-full hover:bg-gray-600;
+}
+
+::-webkit-scrollbar-corner {
+  @apply bg-gray-900;
+}
+
+/* Toast notifications */
+.toast {
+  @apply fixed bottom-4 right-4 z-50 flex items-center gap-2 px-4 py-3 rounded-lg shadow-lg backdrop-blur-sm border;
+}
+
+.toast-success {
+  @apply bg-green-600/90 text-white border-green-500;
+}
+
+.toast-error {
+  @apply bg-red-600/90 text-white border-red-500;
+}
+
+.toast-info {
+  @apply bg-blue-600/90 text-white border-blue-500;
+}
+
+/* Animation keyframes */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { 
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-down {
+  from { 
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.3s ease-out;
+}
+
+.animate-slide-down {
+  animation: slide-down 0.3s ease-out;
+}
+
+/* Heatmap styles */
+.heatmap-cell {
+  @apply w-3 h-3 rounded-sm transition-colors;
+}
+
+.heatmap-cell-0 { @apply bg-gray-800; }
+.heatmap-cell-1 { @apply bg-green-900/30; }
+.heatmap-cell-2 { @apply bg-green-700/50; }
+.heatmap-cell-3 { @apply bg-green-500/70; }
+.heatmap-cell-4 { @apply bg-green-400; }
+
+/* Difficulty badges */
+.badge-easy { @apply bg-green-500/20 text-green-400 border-green-500/30; }
+.badge-medium { @apply bg-yellow-500/20 text-yellow-400 border-yellow-500/30; }
+.badge-hard { @apply bg-red-500/20 text-red-400 border-red-500/30; }
+
+/* Status badges */
+.badge-ac { @apply bg-green-500/20 text-green-400 border-green-500/30; }
+.badge-wa { @apply bg-red-500/20 text-red-400 border-red-500/30; }
+.badge-tle { @apply bg-orange-500/20 text-orange-400 border-orange-500/30; }
+.badge-ce { @apply bg-purple-500/20 text-purple-400 border-purple-500/30; }
+.badge-re { @apply bg-pink-500/20 text-pink-400 border-pink-500/30; }
+.badge-pending { @apply bg-gray-500/20 text-gray-400 border-gray-500/30; }
